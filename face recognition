@@ -1,0 +1,22 @@
+import cv2
+# Load the cascade
+face_cascade = cv2.CascadeClassifier('C:/Prabal/face recognition/data/haarcascade_frontalface_alt2.xml')
+# Read the input image
+img = cv2.imread('desktop/IMG20190830104816.jpg')
+# Convert into grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#resizing the image
+width,height=800,500
+gray_resize=cv2.resize(gray,(width,height))
+# Detect faces
+faces = face_cascade.detectMultiScale(gray_resize, 1.5, 5)
+a=0
+# Draw rectangle around the faces
+for (x, y, w, h) in faces:
+    cv2.rectangle(gray_resize, (x, y), (x+w, y+h), (255, 0, 0), 2)
+    a+=1
+    print(a) # a is number of faces detected
+
+# Display the output
+cv2.imshow('img2',gray_resize)
+cv2.waitKey()
